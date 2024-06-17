@@ -38,7 +38,7 @@ export class LoginComponent {
     if(this.formLogin.invalid) return;
 
     const object:Login = {
-      email: this.formLogin.value.email,
+      username: this.formLogin.value.email,
       password: this.formLogin.value.password
     }
 

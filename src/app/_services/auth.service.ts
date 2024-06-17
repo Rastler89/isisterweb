@@ -14,12 +14,16 @@ const httpOptions = {
 })
 export class AuthService {
 
-  private api: string = appsettings.apiUrl;
+  private api: string = appsettings.apiUrl+'oauth/';
 
   constructor(private http: HttpClient) { }
 
   login(user:Login): Observable<ResponseAccess> {
-    return this.http.post<ResponseAccess>(this.api+'login', user, httpOptions);
+    user.client_id = appsettings.clientId;
+    user.client_secret = appsettings.clientSecret;
+    user.grant_type = 'password';
+    user.scope = '';
+    return this.http.post<ResponseAccess>(this.api+'token', user, httpOptions);
   }
 
   logout(): Observable<any> {
