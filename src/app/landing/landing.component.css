@@ -62,6 +62,12 @@ body {
     color: #fff;
   }
   
+  @media (max-width: 768px) {
+    .hero {
+      background-image: url('/catai2.png');
+    }
+  }
+
   .hero-content {
     max-width: 600px;
     margin: 0 auto;
