@@ -45,9 +45,9 @@ export class LoginComponent {
     this.authService.login(object).subscribe({
       next:(data) => {
         if(data.access_token) {
-          localStorage.setItem('acess_token', data.access_token);
+          localStorage.setItem('access_token', data.access_token);
           localStorage.setItem('refresh_token',data.refresh_token);
-          this.router.navigate(['/']);
+          this.router.navigate(['/home']);
         } else {
           alert('Credentials fails');
         }

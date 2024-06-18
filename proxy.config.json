@@ -1,0 +1,8 @@
+{
+    "/": {
+      "target": "https://4000-idx-isisterbackend-1718301722309.cluster-rcyheetymngt4qx5fpswua3ry4.cloudworkstations.dev",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": { "^/": "" }
+    }
+  }
