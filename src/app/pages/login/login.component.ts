@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { AuthService } from '../_services/auth.service';
+import { AuthService } from '../../_services/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Login } from '../interfaces/Login';
+import { Login } from '../../interfaces/Login';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
