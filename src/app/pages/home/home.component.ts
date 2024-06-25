@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
         console.log(data);
       }, 
       error:(error) => {
-        console.log(error.message);
+        console.log(error.status);
       }
     })
   }

@@ -48,6 +48,7 @@ export class LoginComponent {
           localStorage.setItem('access_token', data.access_token);
           localStorage.setItem('refresh_token',data.refresh_token);
           this.router.navigate(['/home']);
+          window.location.reload();
         } else {
           alert('Credentials fails');
         }

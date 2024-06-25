@@ -6,6 +6,8 @@ import { Login } from '../interfaces/Login';
 import { ResponseAccess } from '../interfaces/responseAccess';
 import { addBodyClass } from '@angular/cdk/schematics';
 import { Refresh } from '../interfaces/Refresh';
+import { StorageService } from './storage.service';
+import { Router } from '@angular/router';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,7 +21,7 @@ export class AuthService {
   private api: string = appsettings.apiUrl+'oauth/';
   
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private storage: StorageService, private router: Router) { }
 
   login(user:Login): Observable<ResponseAccess> {
     user.client_id = appsettings.clientId;
@@ -43,5 +45,22 @@ export class AuthService {
     };
 
     return this.http.post<ResponseAccess>(this.api+'token', rf, httpOptions);
+  }
+
+  renew():void  {
+    this.refresh().subscribe({
+      next:(data) => {
+        if(data.access_token) {
+          console.log(data);
+          localStorage.setItem('access_token', data.access_token);
+          localStorage.setItem('refresh_token',data.refresh_token);
+        }
+      },
+      error:(error) => {
+        this.storage.clean();
+          this.router.navigate(['/login']);
+          window.location.reload();
+      }
+    })
   }
 }
