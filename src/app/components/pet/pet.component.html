@@ -1,8 +1,35 @@
 <div class="card" style="width: 18rem;">
-    <img [src]="pet.imageUrl" class="card-img-top" alt="...">
+    <img *ngIf="pet.imageUrl" [src]="pet.imageUrl" class="card-img-top" alt="...">
+    <div class="btn btn-outline" *ngIf="!pet.imageUrl" data-bs-toggle="modal" data-bs-target="#subirImagen">
+      <img src="profile.svg" class="card-img-top" title="Subir imagen">
+      <p>Subir imagen</p>
+    </div>
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
+      <h5 class="card-title">{{pet.name}}</h5>
       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
       <a href="#" class="btn btn-primary">Go somewhere</a>
     </div>
+</div>
+
+<div class="modal fade" id="subirImagen" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Subir imagen: {{pet.name}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="form-custom" [formGroup]="petForm">
+          <input class="form-control" type="file" (change)="onSelectFile($event)" formControlName="image"/>
+          <div class="image-preview">
+            <img [src]="imagePreviewUrl" alt="Preview Image" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="enviarImagen()">Agregar</button>
+      </div>
+    </div>
   </div>
+</div>

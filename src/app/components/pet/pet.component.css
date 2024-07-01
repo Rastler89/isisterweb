@@ -1,0 +1,12 @@
+.image-preview {
+    width: 100%;
+    border: 1px solid grey;
+    margin-top: 15px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.image-preview img {
+    width: 100%;
+}
