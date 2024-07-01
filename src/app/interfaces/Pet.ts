@@ -7,3 +7,8 @@ export interface Pet {
     code: string;
     imageUrl?: string;
 }
+
+export interface responsePet {
+    count: number;
+    data: Pet[]
+}
