@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex flex-row mb-3">
+            <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addVacuna">Editar datos</button>
+        </div>
+    </div>
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Lote</th>
+                    <th>Fecha de aplicación</th>
+                    <th>Próxima aplicación</th>
+                    <th>Código</th>
+                    <th>Enfermedades</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let vaccine of vaccines">
+                    <td>{{vaccine.name}}</td>
+                    <td>{{vaccine.lot}}</td>
+                    <td>{{vaccine.application}}</td>
+                    <td>{{vaccine.next}}</td>
+                    <td>{{vaccine.vcode}}</td>
+                    <td>{{vaccine.diseases}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="addVacuna" data-bs-backdroop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar vacuna nueva</h1>
+                <button #closebutton type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-custom" [formGroup]="vaccineForm">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="name" formControlName="name"/>
+                    </div>
+                    <div class="mb-3 row">
+                        <h3 class="fs-5">Enfermedades</h3>
+                        <div class="col-md-4" *ngFor="let disease of diseases; let i = index" formArrayName="diseases">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" [formControlName]="i" [value]="disease.id"/>
+                                <label class="form-check-label">{{disease.name.es}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lot" class="form-label">Nº Lote</label>
+                        <input type="text" class="form-control" id="lot" formControlName="lot"/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="application" class="form-label">Fecha de aplicación</label>
+                        <input type="date" class="form-control" id="application" formControlName="application"/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="next" class="form-label">Próxima dosi</label>
+                        <input type="date" class="form-control" id="next" formControlName="next"/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="vcode" class="form-label">Codigo o nombre veterinario</label>
+                        <input type="text" class="form-control" id="vcode" formControlName="vcode" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" (click)="addVaccine()">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>

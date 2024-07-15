@@ -65,8 +65,6 @@ export class HomeComponent implements OnInit {
         });
         this.races = data;
         this.breeds = result;
-        console.log(this.breeds);
-        console.log(this.breeds['Cat']['values']['European']);
       }, 
       error:(error) => {
         console.log(error.status);
@@ -92,6 +90,7 @@ export class HomeComponent implements OnInit {
     this.isister.addPet(object).subscribe({
       next:(data) => {
         console.log(data);
+        //Cerrar modal, refrescar pantalla para carga de la nueva mascota
       }, 
       error:(error) => {
         console.log(error.status);

@@ -5,7 +5,15 @@ export interface Pet {
     race: string;
     breed: string;
     code: string;
-    imageUrl?: string;
+    image?: string;
+    description?: string;
+    character?: string;
+    age?:string;
+    breed_en?:string;
+    breed_es?:string;
+    specie_id?:string;
+    specie_en?:string;
+    specie_es?:string;
 }
 
 export interface responsePet {

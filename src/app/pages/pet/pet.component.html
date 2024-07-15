@@ -1,0 +1,130 @@
+<app-loading *ngIf="isLoading"></app-loading>
+
+<div *ngIf="!isLoading" class="row justify-content-evenly">
+    <div class="col-md-12 col-xl-7 order-action">
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="ms-3">
+                           <h3 class="fs-6">Descripción:</h3>
+                           <p>{{pet.description}}</p>
+                           <h3 class="fs-6">Caracter:</h3>
+                           <p>{{pet.character}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card text-center">
+            <div class="card-header">
+              <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                  <a [ngClass]="{'nav-link': true, 'active': selectedTab === 'Vacunas'}" aria-current="true" (click)="onTabChange('Vacunas')">Vacunas</a>
+                </li>
+                <li class="nav-item">
+                  <a [ngClass]="{'nav-link': true, 'active': selectedTab === 'Alergias'}" (click)="onTabChange('Alergias')">Alergias</a>
+                </li>
+                <li class="nav-item">
+                  <a [ngClass]="{'nav-link': true, 'active': selectedTab === 'Paseos'}" (click)="onTabChange('Paseos')">Paseos</a>
+                </li>
+                <li class="nav-item">
+                    <a [ngClass]="{'nav-link': true, 'active': selectedTab === 'Dietas'}" (click)="onTabChange('Dietas')">Dietas</a>
+                </li>
+                <li class="nav-item">
+                    <a [ngClass]="{'nav-link': true, 'active': selectedTab === 'Historial'}" (click)="onTabChange('Historial')">Historial</a>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <ng-container [ngSwitch]="selectedTab">
+                <ng-container *ngSwitchCase="'Vacunas'">
+                  <app-vaccines [id]="id"></app-vaccines>
+                </ng-container>
+                <ng-container *ngSwitchCase="'Alergias'">
+                  <app-allergies></app-allergies>
+                </ng-container>
+                <ng-container *ngSwitchCase="'Paseos'">
+                  <app-walks></app-walks>
+                </ng-container>
+                <ng-container *ngSwitchCase="'Dietas'">
+                    <app-diets></app-diets>
+                </ng-container>
+                <ng-container *ngSwitchCase="'Historial'">
+                    <app-history></app-history>
+                </ng-container>
+              </ng-container>
+            </div>
+          </div>
+    </div>
+    <div class="col-md-12 col-xl-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex flex-row-reverse mb-3">
+                  <button class="btn btn-outline-danger">Dar de baja</button>
+                  <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#caracMascota">Editar datos</button>
+                </div>
+                <div class="text-center">
+                    <img [src]="pet.image" class="rounded img-thumbnail mx-auto d-block"/>
+                    <h2 class="m-3">{{pet.name}}</h2>
+                    <p><strong>Edad: {{pet.age}}</strong></p>
+                    <p>{{pet.specie_en}} - {{pet.breed_en}}</p>
+                    <p>{{pet.gender}}</p>
+                    <p><em>{{pet.code}}</em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="caracMascota" data-bs-backdroop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Información de la mascota</h1>
+        <button #closebutton type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="form-custom" [formGroup]="petForm">
+          <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name" formControlName="name">
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Genero</label><br/>
+            <div class="form-check form-check-inline">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" id="male" value="M" formControlName="gender">
+                <label class="form-check-label" for="male">Macho</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" id="female" value="F" formControlName="gender">
+                <label class="form-check-label" for="female">Hembra</label>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="birth" class="form-label">Fecha de nacimiento</label>
+            <input type="date" class="form-control" id="birth" formControlName="birth">
+          </div>
+          <div class="form-floating mb-3">
+            <textarea class="form-control" placeholder="Describa su mascota" id="description" formControlName="description"></textarea>
+            <label for="description" class="form-label">Descripción</label>
+          </div>
+          <div class="form-floating mb-3">
+            <textarea class="form-control" placeholder="Como es el caracter de su mascota" id="character" formControlName="character"></textarea>
+            <label for="character" class="form-label">Caracter</label>
+          </div>
+          <div class="mb-3">
+            <label for="code" class="form-label">Codigo</label>
+            <input type="text" class="form-control" id="code" formControlName="code">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button"  class="btn btn-primary" (click)="updatePet()">Modificar datos</button>
+      </div>
+    </div>
+  </div>
+</div>

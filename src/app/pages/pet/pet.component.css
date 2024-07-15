@@ -1,0 +1,10 @@
+@media (max-width: 1200px) {
+    .order-action {
+      order: 2;
+    }
+}
+
+button {
+  margin-right: 2.5px;
+  margin-left: 2.5px;
+}

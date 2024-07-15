@@ -1,13 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { IsisterService } from '../../_services/isister.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-pet',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './pet.component.html',
   styleUrl: './pet.component.css'
@@ -20,7 +23,20 @@ export class PetComponent {
     image: ['',Validators.required]
   });
 
-  imagePreviewUrl: string | null = null;
+  public imagePreviewUrl: string | null = null;
+
+  constructor(private isister: IsisterService) {
+  }
+
+  ngOnInit() {
+        this.pet.image = 'http://localhost/storage/'+this.pet.image;
+        if(this.pet.gender == 'F') {
+          this.pet.gender = 'Hembra';
+        } else {
+          this.pet.gender = 'Macho';
+        }
+        this.calculateAge();
+  }
 
   onSelectFile(event: Event) {
     if (event.target instanceof HTMLInputElement && event.target.files != null) {
@@ -37,7 +53,33 @@ export class PetComponent {
 
   enviarImagen() {
     if (this.petForm.invalid) return;
+    if (this.imagePreviewUrl == null) return;
 
     
+
+    this.isister.addImage(this.pet.id,this.imagePreviewUrl).subscribe({
+      next:(data) => {
+
+      },
+      error:(error) => {
+        console.log(error.status);
+      }
+    });
   }
+
+  calculateAge(): void {
+    const today = new Date();
+    const millisecondsDiff = today.getTime() - Date.parse(this.pet.birth);
+    let years = Math.floor(millisecondsDiff / (1000*60*60*24*365));
+    let months = Math.floor((millisecondsDiff % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+
+    if (years > 1) {
+      this.pet.age = years+" años";
+    } else if (years = 1) {
+      this.pet.age = years+" año";
+    } else {
+      this.pet.age = months+" meses";
+    }
+  }
+
 }

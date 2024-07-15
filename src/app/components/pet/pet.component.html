@@ -1,13 +1,20 @@
 <div class="card" style="width: 18rem;">
-    <img *ngIf="pet.imageUrl" [src]="pet.imageUrl" class="card-img-top" alt="...">
-    <div class="btn btn-outline" *ngIf="!pet.imageUrl" data-bs-toggle="modal" data-bs-target="#subirImagen">
+    <img *ngIf="pet.image" [src]="pet.image" class="card-img-top" alt="...">
+    <div class="btn btn-outline" *ngIf="!pet.image" data-bs-toggle="modal" data-bs-target="#subirImagen">
       <img src="profile.svg" class="card-img-top" title="Subir imagen">
       <p>Subir imagen</p>
     </div>
     <div class="card-body">
       <h5 class="card-title">{{pet.name}}</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <p class="card-text"></p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">{{pet.gender}}</li>
+      <li class="list-group-item">{{pet.age}}</li>
+      <li class="list-group-item">{{pet.code}}</li>
+    </ul>
+    <div class="card-footer">
+      <button class="btn btn-outline-info" [routerLink]="['/pet',pet.id]">Ver perfil</button>
     </div>
 </div>
 

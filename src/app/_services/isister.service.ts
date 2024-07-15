@@ -16,14 +16,42 @@ export class IsisterService {
   constructor(private http: HttpClient) { }
 
   getPets() {
-    return this.http.get(this.api+'pets');
+    return this.http.get(this.api+'pets', httpOptions);
+  }
+
+  getPet(id:string) {
+    return this.http.get(this.api+'pets/'+id, httpOptions);
   }
 
   getSpecies() {
-    return this.http.get(this.api+'species');
+    return this.http.get(this.api+'species', httpOptions);
   }
 
   addPet(pet: Pet) {
-    return this.http.post(this.api+'pets', pet);
+    return this.http.post(this.api+'pets', pet, httpOptions);
+  }
+
+  addImage(id:string,image:string) {
+    return this.http.post(this.api+'pets/'+id,
+      {image: image},
+      httpOptions);
+  }
+
+  updatePet(object:any,id:string) {
+    return this.http.put(this.api+'pets/'+id,
+      object,
+      httpOptions);
+  }
+
+  getDiseases() {
+    return this.http.get(this.api+'diseases', httpOptions);
+  }
+
+  getVaccines(id:string) {
+    return this.http.get(this.api+'vaccines/'+id,httpOptions);
+  }
+
+  addVaccine(vaccine:any,id:string) {
+    return this.http.post(this.api+'vaccines/'+id,vaccine,httpOptions);
   }
 }
