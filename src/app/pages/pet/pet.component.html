@@ -42,16 +42,16 @@
                   <app-vaccines [id]="id"></app-vaccines>
                 </ng-container>
                 <ng-container *ngSwitchCase="'Alergias'">
-                  <app-allergies></app-allergies>
+                  <app-allergies [id]="id"></app-allergies>
                 </ng-container>
                 <ng-container *ngSwitchCase="'Paseos'">
-                  <app-walks></app-walks>
+                  <app-walks [id]="id"></app-walks>
                 </ng-container>
                 <ng-container *ngSwitchCase="'Dietas'">
-                    <app-diets></app-diets>
+                    <app-diets [id]="id"></app-diets>
                 </ng-container>
                 <ng-container *ngSwitchCase="'Historial'">
-                    <app-history></app-history>
+                    <app-history [id]="id"></app-history>
                 </ng-container>
               </ng-container>
             </div>

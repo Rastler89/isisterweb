@@ -54,4 +54,28 @@ export class IsisterService {
   addVaccine(vaccine:any,id:string) {
     return this.http.post(this.api+'vaccines/'+id,vaccine,httpOptions);
   }
+
+  getAllergies(id:string) {
+    return this.http.get(this.api+'allergies/'+id,httpOptions);
+  }
+
+  addAllergy(allergy:any,id:string) {
+    return this.http.post(this.api+'allergies/'+id,allergy,httpOptions);
+  }
+
+  getDiet(id:string) {
+    return this.http.get(this.api+'diets/'+id,httpOptions);
+  }
+
+  addDiet(diet:any,id:string) {
+    return this.http.post(this.api+'diets/'+id,diet,httpOptions);
+  }
+
+  getWalk(id:string) {
+    return this.http.get(this.api+'walks/'+id,httpOptions);
+  }
+
+  addWalk(diet:any,id:string) {
+    return this.http.post(this.api+'walks/'+id,diet,httpOptions);
+  }
 }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, ViewChild, inject } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IsisterService } from '../../_services/isister.service';
 import { Pet } from '../../interfaces/Pet';
@@ -55,7 +55,6 @@ export class VaccinesComponent {
             console.log(dis.name);
           })
           obj.diseases = diseases; 
-          console.log(obj);
         })
         this.vaccines = data;
       },
@@ -66,6 +65,7 @@ export class VaccinesComponent {
   }
 
   addVaccine(): void {
+    if(this.vaccineForm.invalid) return;
     let array: any[] = [];
 
     this.vaccineForm.value.diseases.forEach((x:any,i:any) => {
