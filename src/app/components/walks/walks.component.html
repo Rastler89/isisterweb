@@ -1,1 +1,48 @@
-<p>walks works!</p>
+<div class="row">
+    <div class="col-12">
+        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addWalk">Agregar paseo</button>
+    </div>
+    <div class="col-12 p-3">
+        <app-calendar [calendar]="walks" (delete)="onDelete($event)"></app-calendar>
+    </div>
+</div>
+
+<div class="modal fade" id="addWalk" data-bs-backdroop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar Paseo</h1>
+                <button #closebutton type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-custom" [formGroup]="walkForm">
+                    <div class="mb-3">
+                        <select class="form-select" aria-label="" formControlName="dayOfWeek">
+                            <option selected>Seleccione un dia</option>
+                            <option value="0">Lunes</option>
+                            <option value="1">Martes</option>
+                            <option value="2">Miercoles</option>
+                            <option value="3">Jueves</option>
+                            <option value="4">Viernes</option>
+                            <option value="5">Sabado</option>
+                            <option value="6">Domingo</option>
+                            <option value="8">Todos los dias</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="time" class="form-label">Hora</label>
+                        <input type="time" class="form-control" id="time" formControlName="time">
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Descripción</label>
+                        <textarea class="form-control" formControlName="description"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" (click)="addWalk()">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>

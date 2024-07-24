@@ -71,11 +71,19 @@ export class IsisterService {
     return this.http.post(this.api+'diets/'+id,diet,httpOptions);
   }
 
+  deleteDiet(id:string,day:any,hour:any) {
+    return this.http.delete(this.api+'diets/'+id+'/'+day+'/'+hour,httpOptions);
+  }
+
   getWalk(id:string) {
     return this.http.get(this.api+'walks/'+id,httpOptions);
   }
 
   addWalk(diet:any,id:string) {
     return this.http.post(this.api+'walks/'+id,diet,httpOptions);
+  }
+
+  deleteWalk(id:string,day:any,hour:any) {
+    return this.http.delete(this.api+'walks/'+id+'/'+day+'/'+hour,httpOptions);
   }
 }

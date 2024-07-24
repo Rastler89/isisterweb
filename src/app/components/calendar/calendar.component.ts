@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-calendar',
@@ -12,4 +12,11 @@ import { Component, Input } from '@angular/core';
 })
 export class CalendarComponent {
   @Input() calendar!:any;
+  @Output() delete = new EventEmitter<any>();
+  
+  deleteParent(id:any, id2: any) {
+    let object = [id,id2];
+
+    this.delete.emit(object);
+  }
 }

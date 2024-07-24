@@ -68,4 +68,18 @@ export class DietsComponent {
       }
     })
   }
+
+  onDelete(object:any): void {
+    let day = object[1];
+    let hour = object[0];
+
+    this.isister.deleteDiet(this.id,day,hour).subscribe({
+      next:(object:any) => {
+        this.diets = object;
+      },
+      error:(error) => {
+        console.log(error.status);
+      }
+    })
+  }
 }

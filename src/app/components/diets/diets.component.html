@@ -3,7 +3,7 @@
         <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addDiet">Agregar dieta</button>
     </div>
     <div class="col-12 p-3">
-        <app-calendar [calendar]="diets"></app-calendar>
+        <app-calendar [calendar]="diets" (delete)="onDelete($event)"></app-calendar>
     </div>
 </div>
 
