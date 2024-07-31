@@ -1,1 +1,73 @@
-<p>treatment works!</p>
+<div class="row">
+    <div class="col-12">
+        <button class="btn btn-outline-success" type="button" data-bs-toggle="modal" data-bs-target="#addTreatment">Agregar tratamiento</button>
+    </div>
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Descripción</th>
+                    <th>Repetición</th>
+                    <th>Inicio</th>
+                    <th>Final</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let treatment of treatments">
+                    <td>{{treatment.description}}</td>
+                    <td>{{treatment.repetition}}</td>
+                    <td>{{treatment.start}}</td>
+                    <td>{{treatment.end}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="addTreatment" data-bs-backdroop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar tratamiento</h1>
+                <button #closebutton type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-custom" [formGroup]="treatmentForm">
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="description" formControlName="description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="repitition" class="form-label">Repetición</label>
+                        <select class="form-control" id="repetition" formControlName="repetition">
+                            <option value="">Seleccione una</option>
+                            <option value="4h">Cada 4 horas</option>
+                            <option value="6h">Cada 6 horas</option>
+                            <option value="8h">Cada 8 horas</option>
+                            <option value="12h">Cada 12 horas</option>
+                            <option value="24h">Cada 24 horas</option>
+                            <option value="2d">Cada 2 días</option>
+                            <option value="3d">Cada 3 días</option>
+                            <option value="5d">Cada 5 días</option>
+                            <option value="7d">Cada 7 días</option>
+                            <option value="15d">Cada 15 días</option>
+                            <option value="1m">Cada mes</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="start" class="form-label">Inicio</label>
+                        <input type="date" id="start" formControlName="start" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="end" class="form-label">Fin</label>
+                        <input type="date" id="end" formControlName="end"/>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" (click)="addTreatment()">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,1 +1,57 @@
-<p>medical works!</p>
+<div class="row">
+    <div class="col-12">
+        <button class="btn btn-outline-success" type="button" data-bs-toggle="modal" data-bs-target="#addMedical">Agregar prueba medica</button>
+    </div>
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Descripción</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let medical of medicals">
+                    <td>{{medical.type}}</td>
+                    <td>{{medical.description}}</td>
+                    <td>{{medical.date}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="addMedical" data-bs-backdroop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar prueba medica</h1>
+                <button #closebutton type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-custom" [formGroup]="medicalForm">
+                    <div class="mb-3">
+                        <label for="type" class="form-label">Tipo</label>
+                        <input class="form-control" list="types" id="type" formControlName="type" />
+                        <datalist id="types">
+                            <option *ngFor="let type of types" [value]="type.name">{{type.name}}</option>
+                        </datalist>
+                    </div>
+                    <div class="mb-3">
+                        <label for="date" class="form-label">Fecha</label>
+                        <input type="date" class="form-control" id="date" formControlName="date" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="description" formControlName="description"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" (click)="addMedical()">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>

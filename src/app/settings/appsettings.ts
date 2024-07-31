@@ -2,7 +2,7 @@ export const appsettings = {
     //dev
     apiUrl: "http://localhost/",
     clientId: '2',
-    clientSecret: 'OEmvFpxW8L4eZvsikwKHpaTzT32pCROzAnAG8y3J',
+    clientSecret: 'O8irXSDu7ez5bpdAxFDgya0mcyXh8ktegjBF77Za',
     //prod
     //apiUrl: "https://nucleox.isister.org/",
     //clientId: '4',

@@ -52,7 +52,6 @@ export class VaccinesComponent {
           obj.disease.forEach((dis:any) => {
             let name = JSON.parse(dis.name);
             diseases = diseases + ' ' + name['es'];
-            console.log(dis.name);
           })
           obj.diseases = diseases; 
         })

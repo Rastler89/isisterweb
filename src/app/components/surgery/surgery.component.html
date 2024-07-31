@@ -2,6 +2,31 @@
     <div class="col-12">
         <button class="btn btn-outline-success" type="button" data-bs-toggle="modal" data-bs-target="#addSurgery">Agregar operación</button>
     </div>
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Fecha</th>
+                    <th>Pre-operatorio</th>
+                    <th>Descripción</th>
+                    <th>Resultado</th>
+                    <th>Complicaciones</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let surgery of surgeries">
+                    <td>{{surgery.type}}</td>
+                    <td>{{surgery.fecha}}</td>
+                    <td>{{surgery.preop}}</td>
+                    <td>{{surgery.description}}</td>
+                    <td>{{surgery.result}}</td>
+                    <td>{{surgery.complications}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <div class="modal fade" id="addSurgery" data-bs-backdroop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -12,7 +37,35 @@
                 <button #closebutton type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-    
+                <form class="form-custom" [formGroup]="surgeryForm">
+                    <div class="mb-3">
+                        <label for="type" class="form-label">Tipo</label>
+                        <input class="form-control" list="types" id="type" formControlName="type">
+                        <datalist id="types">
+                            <option *ngFor="let type of types" [value]="type.name">{{type.name}}</option>
+                        </datalist>
+                    </div>
+                    <div class="mb-3">
+                        <label for="date" class="form-label">Fecha</label>
+                        <input type="date" class="form-control" id="date" formControlName="date"/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="preop" class="form-label">Pre-operatorio</label>
+                        <input type="text" class="form-control" id="preop" formControlName="preop"/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="description" formControlName="description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="result" class="form-label">Resultado</label>
+                        <textarea class="form-control" id="result" formControlName="result"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="complications" class="form-label">Complicaciones</label>
+                        <textarea class="form-control" id="complications" formControlName="complications"></textarea>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

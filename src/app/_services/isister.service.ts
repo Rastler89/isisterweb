@@ -86,4 +86,45 @@ export class IsisterService {
   deleteWalk(id:string,day:any,hour:any) {
     return this.http.delete(this.api+'walks/'+id+'/'+day+'/'+hour,httpOptions);
   }
+
+  getSurgery(id:string) {
+    return this.http.get(this.api+'surgeries/'+id,httpOptions);
+  }
+
+  getSurgeryTypes() {
+    return this.http.get(this.api+'surgeryType',httpOptions);
+  }
+
+  addSurgery(surgery:any,id:string) {
+    return this.http.post(this.api+'surgeries/'+id,surgery,httpOptions);
+  }
+
+  getTreatment(id:string) {
+    return this.http.get(this.api+'treatments/'+id,httpOptions);
+  }
+
+  addTreatment(treatment:any,id:string) {
+    return this.http.post(this.api+'treatments/'+id,treatment,httpOptions);
+  }
+
+  getVisit(id:string) {
+    return this.http.get(this.api+'visits/'+id,httpOptions);
+  }
+
+  addVisit(visit:any,id:string) {
+    return this.http.post(this.api+'visits/'+id,visit,httpOptions);
+  }
+
+  getMedicalTypes() {
+    return this.http.get(this.api+'medicalType',httpOptions);
+  }
+
+  getMedical(id:string) {
+    return this.http.get(this.api+'medicals/'+id,httpOptions);
+  }
+
+  addMedical(medical:any,id:string) {
+    return this.http.post(this.api+'medicals/'+id,medical,httpOptions);
+  }
+
 }
