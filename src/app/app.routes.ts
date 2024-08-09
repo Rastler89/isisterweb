@@ -13,5 +13,5 @@ export const routes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [authGuard]},
     { path: 'pet/:id', component: PetComponent, canActivate: [authGuard]},
     { path: 'landing', component: LandingComponent, canActivate: [publicGuard]},
-    { path: '', component: LandingComponent, canActivate: [publicGuard]}
+    { path: '', component: LandingComponent, canActivate: [publicGuard]},
 ];

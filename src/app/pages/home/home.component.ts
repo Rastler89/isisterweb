@@ -1,9 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { IsisterService } from '../../_services/isister.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Pet, responsePet } from '../../interfaces/Pet';
 import { PetComponent } from '../../components/pet/pet.component';
+import { NotificationService } from '../../_services/notification.service';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,8 @@ import { PetComponent } from '../../components/pet/pet.component';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
+  @ViewChild('closebutton') closebutton: any;
+
 
   public formBuild = inject(FormBuilder);
   public petForm: FormGroup = this.formBuild.group({
@@ -34,7 +37,10 @@ export class HomeComponent implements OnInit {
   public pets: Pet[] | undefined;
   public qty: number = 0;
 
-  constructor(private isister: IsisterService) { }
+  constructor(
+    private isister: IsisterService,
+    private notify: NotificationService
+  ) { }
 
 
   ngOnInit(): void {
@@ -88,12 +94,15 @@ export class HomeComponent implements OnInit {
     object.breed = this.breeds[object.race]['values'][object.breed];
 
     this.isister.addPet(object).subscribe({
-      next:(data) => {
+      next:(data) => {  
         console.log(data);
-        //Cerrar modal, refrescar pantalla para carga de la nueva mascota
+        this.closebutton.nativeElement.click();
       }, 
       error:(error) => {
-        console.log(error.status);
+        if(error.status == 422) {
+          this.closebutton.nativeElement.click();
+          this.notify.setAlert('No puedes crear más mascotas, porfavor actualice su suscripción!','danger');
+        }
       }
     })
   }
