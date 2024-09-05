@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { NotificationService } from '../../_services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -32,10 +33,16 @@ export class LoginComponent {
 
   });
   
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService, 
+    private router: Router,
+    private notify: NotificationService
+  ) {}
 
   login() {
-    if(this.formLogin.invalid) return;
+    if(this.formLogin.invalid) {
+      this.notify.setAlert('Por favor revise las credenciales','danger');
+    };
 
     const object:Login = {
       username: this.formLogin.value.email,
@@ -47,10 +54,11 @@ export class LoginComponent {
         if(data.access_token) {
           localStorage.setItem('access_token', data.access_token);
           localStorage.setItem('refresh_token',data.refresh_token);
+          this.notify.setAlert('Sesión iniciada!','success');
           this.router.navigate(['/home']);
           window.location.reload();
         } else {
-          alert('Credentials fails');
+          this.notify.setAlert('Las credenciales no son correctas','danger');
         }
       },
       error:(error) => {
@@ -59,5 +67,7 @@ export class LoginComponent {
     })
   }
 
-  register() {}
+  register() {
+    console.log('vamos')
+  }
 }
