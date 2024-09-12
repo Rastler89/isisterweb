@@ -1,23 +1,15 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../_services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Login } from '../../interfaces/Login';
-
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
 import { NotificationService } from '../../_services/notification.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
+    RouterLink,
     ReactiveFormsModule
   ],
   templateUrl: './login.component.html',
@@ -68,6 +60,6 @@ export class LoginComponent {
   }
 
   register() {
-    console.log('vamos')
+    this.router.navigate(['/register']);
   }
 }

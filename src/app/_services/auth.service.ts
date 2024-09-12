@@ -19,6 +19,7 @@ const httpOptions = {
 export class AuthService {
 
   private api: string = appsettings.apiUrl+'oauth/';
+  private api2: string = appsettings.apiUrl+'api/';
   
 
   constructor(private http: HttpClient, private storage: StorageService, private router: Router) { }
@@ -61,5 +62,9 @@ export class AuthService {
           window.location.reload();
       }
     })
+  }
+
+  register(user:any): Observable<any> {
+    return this.http.post(this.api2+'register', user, httpOptions);
   }
 }
