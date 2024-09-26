@@ -44,17 +44,7 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.isister.getPets().subscribe({
-      next:(object:any) => {
-        const petResponse = object as responsePet;
-        this.pets = petResponse.data;
-        this.qty = petResponse.count;
-        this.isLoading = false;
-      }, 
-      error:(error) => {
-        console.log(error.status);
-      }
-    });
+    this.getPets();
 
     this.isister.getSpecies().subscribe({
       next:(data) => {
@@ -81,6 +71,7 @@ export class HomeComponent implements OnInit {
   addPet() {
     if (this.petForm.invalid) return;
 
+    this.isLoading = true;
     const object:Pet = {
       name: this.petForm.value.name,
       gender: this.petForm.value.gender,
@@ -95,16 +86,35 @@ export class HomeComponent implements OnInit {
 
     this.isister.addPet(object).subscribe({
       next:(data) => {  
-        console.log(data);
         this.closebutton.nativeElement.click();
+        this.notify.setAlert('Mascota creada correctamente','success');
+        this.isLoading = false;
+        this.getPets();
       }, 
       error:(error) => {
         if(error.status == 422) {
           this.closebutton.nativeElement.click();
           this.notify.setAlert('No puedes crear más mascotas, porfavor actualice su suscripción!','danger');
         }
+        this.isLoading = false;
       }
     })
+  }
+
+  getPets() {
+    this.isLoading = true;
+    this.isister.getPets().subscribe({
+      next:(object:any) => {
+        const petResponse = object as responsePet;
+        this.pets = petResponse.data;
+        this.qty = petResponse.count;
+        this.isLoading = false;
+      }, 
+      error:(error) => {
+        this.isLoading = false;
+        console.log(error.status);
+      }
+    });
   }
 
 }

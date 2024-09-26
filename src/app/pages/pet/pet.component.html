@@ -65,7 +65,8 @@
                   <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#caracMascota">Editar datos</button>
                 </div>
                 <div class="text-center">
-                    <img [src]="pet.image" class="rounded img-thumbnail mx-auto d-block"/>
+                    <img src="profile.svg" class="card-img-top" title="Subir imagen" *ngIf="!pet.image">
+                    <img [src]="pet.image" class="rounded img-thumbnail mx-auto d-block" *ngIf="pet.image"/>
                     <h2 class="m-3">{{pet.name}}</h2>
                     <p><strong>Edad: {{pet.age}}</strong></p>
                     <p>{{pet.specie_en}} - {{pet.breed_en}}</p>

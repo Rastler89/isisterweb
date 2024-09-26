@@ -10,6 +10,7 @@ import { HistoryComponent } from '../../components/history/history.component';
 import { Pet } from '../../interfaces/Pet';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoadingComponent } from '../../components/loading/loading.component';
+import { appsettings } from '../../settings/appsettings';
 
 @Component({
   selector: 'app-pet',
@@ -69,6 +70,10 @@ export class PetComponent {
       }
     });
 
+    /*if (this.pet.image != undefined) {
+      this.pet.image = appsettings.apiUrl+'/storage/'+this.pet.image;
+    }*/
+
     this.isister.getDiseases().subscribe({
       next:(object:any) => {
         let array: any[] = [];
@@ -85,6 +90,7 @@ export class PetComponent {
             array.push(obj);
           }
         });
+
         localStorage.setItem('enf',JSON.stringify(array));
       },
       error:(error) => {

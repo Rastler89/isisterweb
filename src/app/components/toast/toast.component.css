@@ -3,4 +3,5 @@
     width: 30vw;
     right: 5vw;
     top: 4vh;
+    z-index: 2000;
 }

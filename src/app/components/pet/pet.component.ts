@@ -3,6 +3,7 @@ import { Component, Input, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IsisterService } from '../../_services/isister.service';
 import { RouterLink } from '@angular/router';
+import { appsettings } from '../../settings/appsettings';
 
 @Component({
   selector: 'app-pet',
@@ -29,9 +30,11 @@ export class PetComponent {
   }
 
   ngOnInit() {
-        this.pet.image = 'http://localhost/storage/'+this.pet.image;
-        if(this.pet.gender == 'F') {
-          this.pet.gender = 'Hembra';
+    if (this.pet.image != null) {
+      this.pet.image = appsettings.apiUrl+'storage/'+this.pet.image;
+    }
+    if(this.pet.gender == 'F') {
+      this.pet.gender = 'Hembra';
         } else {
           this.pet.gender = 'Macho';
         }
