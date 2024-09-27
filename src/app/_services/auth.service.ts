@@ -67,4 +67,8 @@ export class AuthService {
   register(user:any): Observable<any> {
     return this.http.post(this.api2+'register', user, httpOptions);
   }
+
+  changePassword(passwords:any): Observable<any> {
+    return this.http.post(this.api+'changePassword',passwords,httpOptions);
+  }
 }
