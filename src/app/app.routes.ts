@@ -6,12 +6,14 @@ import { authGuard } from './custom/auth.guard';
 import { LandingComponent } from './pages/landing/landing.component';
 import { publicGuard } from './custom/public.guard';
 import { PetComponent } from './pages/pet/pet.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [publicGuard]},
     { path: 'register', component: RegisterComponent, canActivate: [publicGuard]},
     { path: 'home', component: HomeComponent, canActivate: [authGuard]},
     { path: 'pet/:id', component: PetComponent, canActivate: [authGuard]},
+    { path: 'profile', component: ProfileComponent, canActivate: [authGuard]},
     { path: 'landing', component: LandingComponent, canActivate: [publicGuard]},
     { path: '', component: LandingComponent, canActivate: [publicGuard]},
 ];
