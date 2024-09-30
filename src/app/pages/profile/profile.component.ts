@@ -51,10 +51,10 @@ export class ProfileComponent {
 
     this.authService.changePassword(passwords).subscribe({
       next: (data) => {
-
+        this.notify.setAlert('Contraseña canviada!','success');
       },
       error: (error) => {
-
+        this.notify.setAlert('No se han podido modificar los canvios','danger');
       }
     })
   }

@@ -28,19 +28,13 @@
                 </h4>
                 <form class="form-custom" [formGroup]="formPass">
                     <div class="text-center">
-                        <div class="form-group mb-3">
-                            <label for="oldPassword">Contraseña vieja</label>
-                            <input type="password" class="form-control" name="oldPassword" />
-                        </div>
                         <app-input-password 
-                            label="Nueva contraseña"
-                            controlName="newPassword"
-                        />
-                        <div class="form-group mb-3">
-                            <label for="rePassword">Repite contraseña</label>
-                            <input type="password" class="form-control" name="rePassword" />
-                        </div>
-                        <button type="button" class="btn btn-block btn-outline-success">Canviar</button>
+                            label="Contraseña vieja" formControlName="oldPassword" />
+                        <app-input-password 
+                            label="Nueva contraseña" formControlName="newPassword"/>
+                        <app-input-password
+                            label="Repite contraseña" formControlName="rePassword" />
+                        <button (click)="changePassword()" type="button" class="btn btn-block btn-outline-success">Canviar</button>
                     </div>
                 </form>
             </div>
