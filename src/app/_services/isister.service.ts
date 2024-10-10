@@ -127,4 +127,12 @@ export class IsisterService {
     return this.http.post(this.api+'medicals/'+id,medical,httpOptions);
   }
 
+  getCountries() {
+    return this.http.get(this.api+'countries/full',httpOptions);
+  }
+
+  changeProfile(profile:any) {
+    return this.http.post(this.api+'profile',httpOptions);
+  }
+
 }
