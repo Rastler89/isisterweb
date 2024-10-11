@@ -131,6 +131,10 @@ export class IsisterService {
     return this.http.get(this.api+'countries/full',httpOptions);
   }
 
+  getProfile() {
+    return this.http.get(this.api+'profile',httpOptions);
+  }
+
   changeProfile(profile:any) {
     return this.http.post(this.api+'profile',httpOptions);
   }

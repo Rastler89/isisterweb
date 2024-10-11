@@ -41,6 +41,7 @@ export class ProfileComponent {
   public paises: any;
   public filteredStates: any;
   public filteredTowns: any;
+  public profile: any;
 
   constructor (
     private authService: AuthService,
@@ -49,6 +50,11 @@ export class ProfileComponent {
   ) {}
 
   ngOnInit(): void {
+    this.isister.getProfile().subscribe({
+      next:(data:any) => {
+        this.profile = data;
+      }
+    })
     this.isister.getCountries().subscribe({
       next:(data) => {
         let array = Object.values(data);
