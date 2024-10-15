@@ -13,6 +13,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class CalendarComponent {
   @Input() calendar!:any;
   @Output() delete = new EventEmitter<any>();
+  @Input() public:boolean = false;
   
   deleteParent(id:any, id2: any) {
     let object = [id,id2];

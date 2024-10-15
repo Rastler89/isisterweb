@@ -10,11 +10,6 @@ import { HistoryComponent } from '../../components/history/history.component';
 import { Pet } from '../../interfaces/Pet';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { LoadingComponent } from '../../components/loading/loading.component';
-import { VaccinePublicComponent } from "../../components/public/vaccine-public/vaccine-public.component";
-import { AllergiesPublicComponent } from "../../components/public/allergies-public/allergies-public.component";
-import { WalksPublicComponent } from "../../components/public/walks-public/walks-public.component";
-import { DietsPublicComponent } from "../../components/public/diets-public/diets-public.component";
-import { HistoryPublicComponent } from "../../components/public/history-public/history-public.component";
 
 @Component({
   selector: 'app-pet',
@@ -28,11 +23,6 @@ import { HistoryPublicComponent } from "../../components/public/history-public/h
     HistoryComponent,
     ReactiveFormsModule,
     LoadingComponent,
-    VaccinePublicComponent,
-    AllergiesPublicComponent,
-    WalksPublicComponent,
-    DietsPublicComponent,
-    HistoryPublicComponent
 ],
   templateUrl: './pet.component.html',
   styleUrl: './pet.component.css'

@@ -50,13 +50,13 @@
                     <app-allergies-public [allergies]="pet.allergies"></app-allergies-public>
                   </ng-container>
                   <ng-container *ngSwitchCase="'Paseos'">
-                    <app-walks-public [id]="id"></app-walks-public>
+                    <app-schedule [schedule]="pet.scheduleWalks"></app-schedule>
                   </ng-container>
                   <ng-container *ngSwitchCase="'Dietas'">
-                      <app-diets-public [id]="id"></app-diets-public>
+                    <app-schedule [schedule]="pet.scheduleDiets"></app-schedule>
                   </ng-container>
                   <ng-container *ngSwitchCase="'Historial'">
-                      <app-history-public [id]="id"></app-history-public>
+                      <app-history-public [pet]="pet"></app-history-public>
                   </ng-container>
               </ng-container>
           </div>

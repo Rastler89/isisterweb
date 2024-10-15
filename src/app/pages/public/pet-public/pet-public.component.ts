@@ -7,8 +7,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { LoadingComponent } from '../../../components/loading/loading.component';
 import { VaccinePublicComponent } from '../../../components/public/vaccine-public/vaccine-public.component';
 import { AllergiesPublicComponent } from '../../../components/public/allergies-public/allergies-public.component';
-import { WalksPublicComponent } from '../../../components/public/walks-public/walks-public.component';
-import { DietsPublicComponent } from '../../../components/public/diets-public/diets-public.component';
+import { ScheduleComponent } from '../../../components/public/schedule/schedule-public.component';
 import { HistoryPublicComponent } from '../../../components/public/history-public/history-public.component';
 
 @Component({
@@ -19,9 +18,8 @@ import { HistoryPublicComponent } from '../../../components/public/history-publi
     LoadingComponent,
     VaccinePublicComponent,
     AllergiesPublicComponent,
-    WalksPublicComponent,
-    DietsPublicComponent,
-    HistoryPublicComponent
+    HistoryPublicComponent,
+    ScheduleComponent
   ],
   templateUrl: './pet-public.component.html',
   styleUrl: './pet-public.component.css'
