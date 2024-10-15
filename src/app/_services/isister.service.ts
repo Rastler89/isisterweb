@@ -139,4 +139,8 @@ export class IsisterService {
     return this.http.post(this.api+'profile',httpOptions);
   }
 
+  getPublicPet(hash:string) {
+    return this.http.get(this.api+'public/pet/'+hash,httpOptions);
+  }
+
 }

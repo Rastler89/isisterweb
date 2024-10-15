@@ -1,0 +1,79 @@
+<nav class="navbar fixed-top bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="https://isister.org">Isister</a>
+    </div>
+</nav>
+
+<app-loading *ngIf="isLoading" class="loading"></app-loading>
+
+<div *ngIf="!isLoading" class="row justify-content-evenly content">
+    <div class="col-md-12 col-xl-7 order-action">
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="ms-3">
+                           <h3 class="fs-6">Descripción:</h3>
+                           <p>{{pet.description}}</p>
+                           <h3 class="fs-6">Caracter:</h3>
+                           <p>{{pet.character}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card text-center">
+            <div class="card-header">
+              <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                  <a [ngClass]="{'nav-link': true, 'active': selectedTab === 'Vacunas'}" aria-current="true" (click)="onTabChange('Vacunas')">Vacunas</a>
+                </li>
+                <li class="nav-item">
+                  <a [ngClass]="{'nav-link': true, 'active': selectedTab === 'Alergias'}" (click)="onTabChange('Alergias')">Alergias</a>
+                </li>
+                <li class="nav-item">
+                  <a [ngClass]="{'nav-link': true, 'active': selectedTab === 'Paseos'}" (click)="onTabChange('Paseos')">Paseos</a>
+                </li>
+                <li class="nav-item">
+                    <a [ngClass]="{'nav-link': true, 'active': selectedTab === 'Dietas'}" (click)="onTabChange('Dietas')">Dietas</a>
+                </li>
+                <li class="nav-item">
+                    <a [ngClass]="{'nav-link': true, 'active': selectedTab === 'Historial'}" (click)="onTabChange('Historial')">Historial</a>
+                </li>
+              </ul>
+            </div>
+            <ng-container [ngSwitch]="selectedTab">
+                <ng-container *ngSwitchCase="'Vacunas'">
+                    <app-vaccine-public [vaccines]="pet.vaccines"></app-vaccine-public>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="'Alergias'">
+                    <app-allergies-public [allergies]="pet.allergies"></app-allergies-public>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="'Paseos'">
+                    <app-walks-public [id]="id"></app-walks-public>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="'Dietas'">
+                      <app-diets-public [id]="id"></app-diets-public>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="'Historial'">
+                      <app-history-public [id]="id"></app-history-public>
+                  </ng-container>
+              </ng-container>
+          </div>
+    </div>
+    <div class="col-md-12 col-xl-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-center">
+                    <img src="profile.svg" class="card-img-top" title="Subir imagen" *ngIf="!pet.image">
+                    <img [src]="pet.image" class="rounded img-thumbnail mx-auto d-block" *ngIf="pet.image"/>
+                    <h2 class="m-3">{{pet.name}}</h2>
+                    <p><strong>Edad: {{pet.age}}</strong></p>
+                    <p>{{pet.specie_en}} - {{pet.breed_en}}</p>
+                    <p>{{pet.gender}}</p>
+                    <p><em>{{pet.code}}</em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

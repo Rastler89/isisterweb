@@ -10,3 +10,7 @@
 .image-preview img {
     width: 100%;
 }
+
+.copy {
+    cursor: pointer; 
+}

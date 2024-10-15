@@ -25,6 +25,7 @@ export class PetComponent {
   });
 
   public imagePreviewUrl: string | null = null;
+  public urlProfilePublic: string | undefined;
 
   constructor(private isister: IsisterService) {
   }
@@ -35,10 +36,11 @@ export class PetComponent {
     }
     if(this.pet.gender == 'F') {
       this.pet.gender = 'Hembra';
-        } else {
-          this.pet.gender = 'Macho';
-        }
-        this.calculateAge();
+    } else {
+      this.pet.gender = 'Macho';
+    }
+    this.calculateAge();
+    this.urlProfilePublic = 'https://localhost/public/pet/'+this.pet.hash;
   }
 
   onSelectFile(event: Event) {
@@ -82,6 +84,15 @@ export class PetComponent {
       this.pet.age = years+" año";
     } else {
       this.pet.age = months+" meses";
+    }
+  }
+
+  toClipboard(): void {
+    if(this.urlProfilePublic != undefined) {
+      navigator.clipboard.writeText(this.urlProfilePublic);
+      alert('Copiado!');
+    } else {
+      alert('No hay nada que copiar');
     }
   }
 

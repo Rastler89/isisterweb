@@ -50,7 +50,15 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        enlace, generador qr 
+        <label for="enlace" class="form-label">Enlace</label>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="enlace" readonly value="https://localhost/public/pet/{{pet.hash}}">
+          <span class="input-group-text copy" (click)="toClipboard()" id="copiarEnlace">Copiar</span>
+        </div>
+        <div class="text-center">
+          <img id="qrCode" src="" alt="Código QR">
+          <a href="#" id="descargarQR" class="btn btn-secondary mt-2">Descargar QR</a>
+        </div>
       </div>
     </div>
   </div>

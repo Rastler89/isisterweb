@@ -7,6 +7,7 @@ import { LandingComponent } from './pages/landing/landing.component';
 import { publicGuard } from './custom/public.guard';
 import { PetComponent } from './pages/pet/pet.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { PetPublicComponent } from './pages/public/pet-public/pet-public.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [publicGuard]},
@@ -15,5 +16,6 @@ export const routes: Routes = [
     { path: 'pet/:id', component: PetComponent, canActivate: [authGuard]},
     { path: 'profile', component: ProfileComponent, canActivate: [authGuard]},
     { path: 'landing', component: LandingComponent, canActivate: [publicGuard]},
+    { path: 'public/pet/:hash', component: PetPublicComponent, canActivate: [publicGuard]},
     { path: '', component: LandingComponent, canActivate: [publicGuard]},
 ];

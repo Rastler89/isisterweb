@@ -14,6 +14,8 @@ export interface Pet {
     specie_id?:string;
     specie_en?:string;
     specie_es?:string;
+    vaccines?: any;
+    allergies?: any;
 }
 
 export interface responsePet {

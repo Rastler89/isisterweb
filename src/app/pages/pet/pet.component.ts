@@ -8,9 +8,13 @@ import { DietsComponent } from '../../components/diets/diets.component';
 import { WalksComponent } from '../../components/walks/walks.component';
 import { HistoryComponent } from '../../components/history/history.component';
 import { Pet } from '../../interfaces/Pet';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { LoadingComponent } from '../../components/loading/loading.component';
-import { appsettings } from '../../settings/appsettings';
+import { VaccinePublicComponent } from "../../components/public/vaccine-public/vaccine-public.component";
+import { AllergiesPublicComponent } from "../../components/public/allergies-public/allergies-public.component";
+import { WalksPublicComponent } from "../../components/public/walks-public/walks-public.component";
+import { DietsPublicComponent } from "../../components/public/diets-public/diets-public.component";
+import { HistoryPublicComponent } from "../../components/public/history-public/history-public.component";
 
 @Component({
   selector: 'app-pet',
@@ -23,8 +27,13 @@ import { appsettings } from '../../settings/appsettings';
     WalksComponent,
     HistoryComponent,
     ReactiveFormsModule,
-    LoadingComponent
-  ],
+    LoadingComponent,
+    VaccinePublicComponent,
+    AllergiesPublicComponent,
+    WalksPublicComponent,
+    DietsPublicComponent,
+    HistoryPublicComponent
+],
   templateUrl: './pet.component.html',
   styleUrl: './pet.component.css'
 })
@@ -102,7 +111,7 @@ export class PetComponent {
   getPet(object:any) {
     this.pet = object as Pet;
     this.petForm.patchValue(object);
-    this.pet.image = 'http://localhost/storage/'+this.pet.image;
+    this.pet.image = 'https://nucleox.isister.org/storage/'+this.pet.image;
     if(this.pet.gender == 'F') {
       this.pet.gender = 'Hembra';
     } else {

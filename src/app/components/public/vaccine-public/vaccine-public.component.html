@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Lote</th>
+                    <th>Fecha de aplicación</th>
+                    <th>Próxima aplicación</th>
+                    <th>Código</th>
+                    <th>Enfermedades</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let vaccine of vaccines">
+                    <td>{{vaccine.name}}</td>
+                    <td>{{vaccine.lot}}</td>
+                    <td>{{vaccine.application}}</td>
+                    <td>{{vaccine.next}}</td>
+                    <td>{{vaccine.vcode}}</td>
+                    <td>
+                        <span *ngFor="let disease of vaccine.disease">{{disease.name_es}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
