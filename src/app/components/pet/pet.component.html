@@ -52,12 +52,12 @@
       <div class="modal-body">
         <label for="enlace" class="form-label">Enlace</label>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" id="enlace" readonly value="https://localhost/public/pet/{{pet.hash}}">
+          <input type="text" class="form-control" id="enlace" readonly value="{{urlProfilePublic}}">
           <span class="input-group-text copy" (click)="toClipboard()" id="copiarEnlace">Copiar</span>
         </div>
         <div class="text-center">
-          <img id="qrCode" src="" alt="Código QR">
-          <a href="#" id="descargarQR" class="btn btn-secondary mt-2">Descargar QR</a>
+          <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="urlProfilePublic" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+          <a [href]="qrCodeDownloadLink" download="qrcode">Descargar</a>
         </div>
       </div>
     </div>

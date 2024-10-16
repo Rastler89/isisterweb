@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { IsisterService } from '../../_services/isister.service';
 import { RouterLink } from '@angular/router';
 import { appsettings } from '../../settings/appsettings';
+import { QRCodeModule } from 'angularx-qrcode';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-pet',
@@ -11,7 +13,8 @@ import { appsettings } from '../../settings/appsettings';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    QRCodeModule
   ],
   templateUrl: './pet.component.html',
   styleUrl: './pet.component.css'
@@ -25,7 +28,8 @@ export class PetComponent {
   });
 
   public imagePreviewUrl: string | null = null;
-  public urlProfilePublic: string | undefined;
+  public urlProfilePublic: string = '';
+  public qrCodeDownloadLink: SafeUrl = "";
 
   constructor(private isister: IsisterService) {
   }
@@ -40,7 +44,7 @@ export class PetComponent {
       this.pet.gender = 'Macho';
     }
     this.calculateAge();
-    this.urlProfilePublic = 'https://localhost/public/pet/'+this.pet.hash;
+    this.urlProfilePublic = 'https://isister.org/public/pet/'+this.pet.hash;
   }
 
   onSelectFile(event: Event) {
@@ -94,6 +98,10 @@ export class PetComponent {
     } else {
       alert('No hay nada que copiar');
     }
+  }
+
+  onChangeURL(url: SafeUrl) {
+    this.qrCodeDownloadLink = url;
   }
 
 }
