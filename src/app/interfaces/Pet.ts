@@ -18,6 +18,10 @@ export interface Pet {
     allergies?: any;
     scheduleWalks?: any;
     scheduleDiets?: any;
+    vetvisits?: any;
+    treatments?: any;
+    surgeries?: any;
+    medicaltests?: any;
 }
 
 export interface responsePet {

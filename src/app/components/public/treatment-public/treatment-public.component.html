@@ -1,1 +1,22 @@
-<p>treatment-public works!</p>
+<div class="row">
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Descripción</th>
+                    <th>Repetición</th>
+                    <th>Inicio</th>
+                    <th>Final</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let treatment of treatments">
+                    <td>{{treatment.description}}</td>
+                    <td>{{treatment.repetition}}</td>
+                    <td>{{treatment.start}}</td>
+                    <td>{{treatment.end}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,1 +1,18 @@
-<p>vet-visit-public works!</p>
+<div class="row">
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Descripción</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let visit of visits">
+                    <td>{{visit.description}}</td>
+                    <td>{{visit.date}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

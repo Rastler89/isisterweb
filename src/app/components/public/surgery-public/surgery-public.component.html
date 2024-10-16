@@ -1,1 +1,27 @@
-<p>surgery-public works!</p>
+<div class="row">
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Fecha</th>
+                    <th>Pre-operatorio</th>
+                    <th>Descripción</th>
+                    <th>Resultado</th>
+                    <th>Complicaciones</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let surgery of surgeries">
+                    <td>{{surgery.type}}</td>
+                    <td>{{surgery.fecha}}</td>
+                    <td>{{surgery.preop}}</td>
+                    <td>{{surgery.description}}</td>
+                    <td>{{surgery.result}}</td>
+                    <td>{{surgery.complications}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

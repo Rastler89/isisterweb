@@ -1,1 +1,20 @@
-<p>medical-public works!</p>
+<div class="row">
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Descripción</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let medical of medicaltests">
+                    <td>{{medical.type}}</td>
+                    <td>{{medical.description}}</td>
+                    <td>{{medical.date}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -11,5 +11,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './vaccine-public.component.css'
 })
 export class VaccinePublicComponent {
-  @Input() vaccines: any
+  @Input() vaccines: any;
 }
