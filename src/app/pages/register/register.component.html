@@ -59,7 +59,8 @@
                   </div>
                   <div class="col-12">
                     <div class="d-grid">
-                      <button class="btn btn-lg btn-dark rounded-0 fs-6" type="button" (click)="register()">Registro</button>
+                      <app-loading *ngIf="isLoading"></app-loading>
+                      <button *ngIf="!isLoading" class="btn btn-lg btn-dark rounded-0 fs-6" type="button" (click)="register()">Registro</button>
                     </div>
                   </div>
                 </div>
