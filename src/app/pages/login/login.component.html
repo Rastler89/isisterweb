@@ -48,7 +48,8 @@
                 </div>
                 <div class="col-12">
                   <div class="d-grid">
-                    <button class="btn btn-lg btn-dark rounded-0 fs-6" type="button" (click)="login()">Log in</button>
+                    <app-loading *ngIf="isLoading"></app-loading>
+                    <button *ngIf="!isLoading" class="btn btn-lg btn-dark rounded-0 fs-6" type="button" (click)="login()">Log in</button>
                   </div>
                 </div>
               </div>

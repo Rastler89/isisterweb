@@ -4,11 +4,15 @@ import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Login } from '../../interfaces/Login';
 import { NotificationService } from '../../_services/notification.service';
+import { CommonModule } from '@angular/common';
+import { LoadingComponent } from '../../components/loading/loading.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
+    CommonModule,
+    LoadingComponent,
     RouterLink,
     ReactiveFormsModule
   ],
@@ -17,6 +21,8 @@ import { NotificationService } from '../../_services/notification.service';
   
 })
 export class LoginComponent {
+
+  public isLoading: boolean = false;
 
   public formBuild = inject(FormBuilder);
   public formLogin: FormGroup = this.formBuild.group({
@@ -36,6 +42,8 @@ export class LoginComponent {
       this.notify.setAlert('Por favor revise las credenciales','danger');
     };
 
+    this.isLoading = true;
+
     const object:Login = {
       username: this.formLogin.value.email,
       password: this.formLogin.value.password
@@ -52,9 +60,11 @@ export class LoginComponent {
         } else {
           this.notify.setAlert('Las credenciales no son correctas','danger');
         }
+        this.isLoading = false;
       },
       error:(error) => {
-        console.log(error.message);
+        this.isLoading = false;
+        this.notify.setAlert('Algún error ha sucedido, porfavor intente más tarde','danger');
       }
     })
   }
