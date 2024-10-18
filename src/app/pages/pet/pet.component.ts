@@ -110,6 +110,7 @@ export class PetComponent {
     this.calculateAge();
     this.isLoading = false;
     localStorage.setItem('Pet', JSON.stringify(this.pet));
+    console.log(this.pet);
   }
 
   onTabChange(tabName: string) {
@@ -154,5 +155,22 @@ export class PetComponent {
         console.log(error.status);
       }
     })
+  }
+
+  actualizar() {
+    this.isLoading = true;
+    this.isister.getPet(this.id).subscribe({
+      next:(object:any) => {
+        this.getPet(object);
+        this.isLoading = false;
+      },
+      error:(error) => {
+        this.isLoading=false;
+      }
+    });
+  }
+
+  confirmDown(): void {
+    
   }
 }

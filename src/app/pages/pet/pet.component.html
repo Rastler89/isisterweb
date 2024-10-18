@@ -39,7 +39,7 @@
             <div class="card-body">
               <ng-container [ngSwitch]="selectedTab">
                 <ng-container *ngSwitchCase="'Vacunas'">
-                  <app-vaccines [id]="id"></app-vaccines>
+                  <app-vaccines [id]="id" [vaccines]="pet.vaccines" (update)="actualizar()"></app-vaccines>
                 </ng-container>
                 <ng-container *ngSwitchCase="'Alergias'">
                   <app-allergies [id]="id"></app-allergies>
@@ -61,7 +61,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex flex-row-reverse mb-3">
-                  <button class="btn btn-outline-danger">Dar de baja</button>
+                  <button class="btn btn-outline-danger" (click)="confirmDown()">Dar de baja</button>
                   <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#caracMascota">Editar datos</button>
                 </div>
                 <div class="text-center">

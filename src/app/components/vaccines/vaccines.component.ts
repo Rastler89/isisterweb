@@ -1,32 +1,40 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IsisterService } from '../../_services/isister.service';
 import { Pet } from '../../interfaces/Pet';
+import { LoadingComponent } from '../loading/loading.component';
+import { NotificationService } from '../../_services/notification.service';
 
 @Component({
   selector: 'app-vaccines',
   standalone: true,
   imports: [
     CommonModule,
+    LoadingComponent,
     ReactiveFormsModule
   ],
   templateUrl: './vaccines.component.html',
   styleUrl: './vaccines.component.css'
 })
 export class VaccinesComponent {
-  @Input() id!: string
+  @Input() id!: string;
+  @Input() vaccines: any | undefined;
+
+  @Output() update = new EventEmitter<void>();
+
   @ViewChild('closebutton') closebutton: any;
 
   vaccineForm: FormGroup;
 
+  public isLoading: boolean = false;
   public diseases: any;
   public pet: Pet;
-  public vaccines: any;
 
   constructor(
     private isister: IsisterService,
-    private formBuild: FormBuilder
+    private formBuild: FormBuilder,
+    private notify: NotificationService
   ) {
     this.pet = JSON.parse(localStorage.getItem('Pet')!);
 
@@ -41,25 +49,6 @@ export class VaccinesComponent {
       diseases: this.formBuild.array(
         this.diseases.map(() => 1 == 1)
       )
-    })
-  }
-
-  ngOnInit(): void {
-    this.isister.getVaccines(this.id).subscribe({
-      next:(data:any) => {
-        data.forEach((obj:any) => {
-          let diseases = '';
-          obj.disease.forEach((dis:any) => {
-            let name = JSON.parse(dis.name);
-            diseases = diseases + ' ' + name['es'];
-          })
-          obj.diseases = diseases; 
-        })
-        this.vaccines = data;
-      },
-      error:(error) => {
-        console.log(error.status);
-      }
     })
   }
 
@@ -85,6 +74,8 @@ export class VaccinesComponent {
     this.isister.addVaccine(object, this.id).subscribe({
       next:(object:any) => {
         this.closebutton.nativeElement.click();
+        this.notify.setAlert('Vacuna añadida','success');
+        this.update.emit();
       },
       error:(error) => {
         console.log(error.status);
