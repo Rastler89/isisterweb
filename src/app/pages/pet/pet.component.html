@@ -45,7 +45,7 @@
                   <app-allergies [id]="id" [allergies]="pet.allergies" (update)="actualizar()"></app-allergies>
                 </ng-container>
                 <ng-container *ngSwitchCase="'Paseos'">
-                  <app-walks [id]="id"></app-walks>
+                  <app-walks [id]="id" [walks]="pet.scheduleWalks" (update)="actualizar()"></app-walks>
                 </ng-container>
                 <ng-container *ngSwitchCase="'Dietas'">
                     <app-diets [id]="id"></app-diets>

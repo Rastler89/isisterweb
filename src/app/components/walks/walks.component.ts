@@ -1,9 +1,11 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { CalendarComponent } from '../calendar/calendar.component';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Pet } from '../../interfaces/Pet';
 import { IsisterService } from '../../_services/isister.service';
+import { LoadingComponent } from '../loading/loading.component';
+import { NotificationService } from '../../_services/notification.service';
 
 @Component({
   selector: 'app-walks',
@@ -11,6 +13,7 @@ import { IsisterService } from '../../_services/isister.service';
   imports: [
     CalendarComponent,
     CommonModule,
+    LoadingComponent,
     ReactiveFormsModule
   ],
   templateUrl: './walks.component.html',
@@ -18,16 +21,21 @@ import { IsisterService } from '../../_services/isister.service';
 })
 export class WalksComponent {
   @Input() id!:string;
+  @Input() walks: any;
+
+  @Output() update = new EventEmitter<void>();
+
   @ViewChild('closebutton') closebutton: any;
 
   walkForm: FormGroup;
 
   public pet: Pet;
-  public walks: any;
+  public isLoading: boolean = false;
 
   constructor(
     private isister: IsisterService,
-    private formBuild: FormBuilder
+    private formBuild: FormBuilder,
+    private notify: NotificationService
   ) {
     this.pet = JSON.parse(localStorage.getItem('Pet')!);
 
@@ -38,19 +46,10 @@ export class WalksComponent {
     })
   }
 
-  ngOnInit(): void {
-    this.isister.getWalk(this.id).subscribe({
-      next:(data:any) => {
-        this.walks = data;
-      }, 
-      error: (error) => {
-        console.log(error.status);
-      }
-    })
-  }
-
   addWalk(): void {
     if(this.walkForm.invalid) return;
+
+    this.isLoading = true;
 
     const object:any = {
       DayOfWeek: this.walkForm.value.dayOfWeek,
@@ -61,9 +60,13 @@ export class WalksComponent {
     this.isister.addWalk(object,this.id).subscribe({
       next:(object:any) => {
         this.closebutton.nativeElement.click();
+        this.isLoading = false;
+        this.notify.setAlert('Rutina agregada','success');
+        this.update.emit();
       },
       error:(error) => {
-        console.log(error.status);
+        this.isLoading = false;
+        this.notify.setAlert('No se ha podido agregar','danger');
       }
     })
   }
@@ -72,9 +75,11 @@ export class WalksComponent {
     let day = object[1];
     let hour = object[0];
 
+
     this.isister.deleteWalk(this.id,day,hour).subscribe({
       next:(object:any) => {
         this.walks = object;
+        this.update.emit();
       },
       error:(error) => {
         console.log(error);
