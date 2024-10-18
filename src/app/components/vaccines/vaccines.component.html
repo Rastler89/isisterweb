@@ -23,7 +23,9 @@
                     <td>{{vaccine.application}}</td>
                     <td>{{vaccine.next}}</td>
                     <td>{{vaccine.vcode}}</td>
-                    <td>{{vaccine.diseases}}</td>
+                    <td>
+                        <span *ngFor="let disease of vaccine.disease">{{disease.name_es}}</span>
+                    </td>
                 </tr>
             </tbody>
         </table>

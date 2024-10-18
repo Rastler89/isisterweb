@@ -42,7 +42,7 @@
                   <app-vaccines [id]="id" [vaccines]="pet.vaccines" (update)="actualizar()"></app-vaccines>
                 </ng-container>
                 <ng-container *ngSwitchCase="'Alergias'">
-                  <app-allergies [id]="id"></app-allergies>
+                  <app-allergies [id]="id" [allergies]="pet.allergies" (update)="actualizar()"></app-allergies>
                 </ng-container>
                 <ng-container *ngSwitchCase="'Paseos'">
                   <app-walks [id]="id"></app-walks>
