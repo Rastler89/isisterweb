@@ -28,11 +28,11 @@
         <div class="modal-body">
           <form class="form-custom" [formGroup]="petForm">
             <div class="mb-3">
-              <label for="name" class="form-label">Nombre</label>
+              <label for="name" class="form-label">Nombre <span class="text-danger">*</span></label>
               <input type="text" class="form-control" id="name" formControlName="name">
             </div>
             <div class="mb-3">
-              <label for="gender" class="form-label">Genero</label><br/>
+              <label for="gender" class="form-label">Genero <span class="text-danger">*</span></label><br/>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="gender" id="male" value="M" formControlName="gender">
                 <label class="form-check-label" for="male">Macho</label>
@@ -43,18 +43,18 @@
               </div>
             </div>
             <div class="mb-3">
-              <label for="birth" class="form-label">Fecha de nacimiento</label>
+              <label for="birth" class="form-label">Fecha de nacimiento <span class="text-danger">*</span></label>
               <input type="date" class="form-control" id="birth" formControlName="birth">
             </div>
             <div class="mb-3">
-              <label for="race" class="form-label">Especie</label>
+              <label for="race" class="form-label">Especie <span class="text-danger">*</span></label>
               <input class="form-control" list="raceOptions" id="race" formControlName="race">
               <datalist id="raceOptions">
                 <option *ngFor="let race of races" [value]="race.name.es">{{race.name.es}}</option>"
               </datalist>
             </div>
             <div class="mb-3">
-              <label for="breed" class="form-label">Raza</label>
+              <label for="breed" class="form-label">Raza <span class="text-danger">*</span></label>
               <input class="form-control" list="breedOptions" id="breed" formControlName="breed" >
               <datalist id="breedOptions">
                 <option *ngFor="let breed of breeds[this.petForm.value.race]" [value]="breed.name.es">{{breed.name.es}}</option>"

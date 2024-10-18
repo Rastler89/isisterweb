@@ -14,7 +14,6 @@ import { ToastComponent } from './components/toast/toast.component';
     imports: [RouterOutlet, CommonModule, MenuComponent, FooterComponent, ToastComponent]
 })
 export class AppComponent {
-  title = 'myapp';
 
   public isLogged: boolean = false;
 

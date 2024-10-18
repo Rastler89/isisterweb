@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
     birth: ['',Validators.required],
     race: ['',Validators.required],
     breed: ['',Validators.required],
-    code: ['',Validators.required]
+    code: ['']
   });
 
   public races: any;
@@ -69,7 +69,10 @@ export class HomeComponent implements OnInit {
   }
 
   addPet() {
-    if (this.petForm.invalid) return;
+    if (this.petForm.invalid) {
+      this.notify.setAlert('Porfavor rellene los campos obligatorios','danger');
+      return;
+    };
 
     this.isLoading = true;
     const object:Pet = {
