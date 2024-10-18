@@ -6,6 +6,8 @@ import { RouterLink } from '@angular/router';
 import { appsettings } from '../../settings/appsettings';
 import { QRCodeModule } from 'angularx-qrcode';
 import { SafeUrl } from '@angular/platform-browser';
+import { LoadingComponent } from "../loading/loading.component";
+import { NotificationService } from '../../_services/notification.service';
 
 @Component({
   selector: 'app-pet',
@@ -14,8 +16,9 @@ import { SafeUrl } from '@angular/platform-browser';
     CommonModule,
     ReactiveFormsModule,
     RouterLink,
-    QRCodeModule
-  ],
+    QRCodeModule,
+    LoadingComponent
+],
   templateUrl: './pet.component.html',
   styleUrl: './pet.component.css'
 })
@@ -27,12 +30,17 @@ export class PetComponent {
     image: ['',Validators.required]
   });
 
+  public isLoading: boolean = false;
+  public imageError: boolean = false;
+
   public imagePreviewUrl: string | null = null;
   public urlProfilePublic: string = '';
   public qrCodeDownloadLink: SafeUrl = "";
 
-  constructor(private isister: IsisterService) {
-  }
+  constructor(
+    private isister: IsisterService,
+    private notify: NotificationService
+  ) { }
 
   ngOnInit() {
     if (this.pet.image != null) {
@@ -64,14 +72,16 @@ export class PetComponent {
     if (this.petForm.invalid) return;
     if (this.imagePreviewUrl == null) return;
 
-    
+    this.isLoading = true;
 
     this.isister.addImage(this.pet.id,this.imagePreviewUrl).subscribe({
       next:(data) => {
-
+        this.isLoading = false;
+        this.notify.setAlert('Imagen subida','success');
       },
       error:(error) => {
-        console.log(error.status);
+        this.isLoading = false;
+        this.notify.setAlert('No se ha podido subir','danger');
       }
     });
   }
@@ -94,14 +104,18 @@ export class PetComponent {
   toClipboard(): void {
     if(this.urlProfilePublic != undefined) {
       navigator.clipboard.writeText(this.urlProfilePublic);
-      alert('Copiado!');
+      this.notify.setAlert('Se ha copiado el enlace','success');
     } else {
-      alert('No hay nada que copiar');
+      this.notify.setAlert('No hay nada para copiar','danger');
     }
   }
 
   onChangeURL(url: SafeUrl) {
     this.qrCodeDownloadLink = url;
+  }
+
+  onImageError() {
+    this.imageError = true;
   }
 
 }

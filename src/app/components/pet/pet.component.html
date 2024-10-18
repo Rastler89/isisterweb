@@ -1,6 +1,6 @@
 <div class="card" style="width: 18rem;">
-    <img *ngIf="pet.image" [src]="pet.image" class="card-img-top" alt="...">
-    <div class="btn btn-outline" *ngIf="!pet.image" data-bs-toggle="modal" data-bs-target="#subirImagen">
+    <img (error)="onImageError()" *ngIf="pet.image && !imageError" [src]="pet.image" class="card-img-top" alt="{{pet.name}}">
+    <div class="btn btn-outline" *ngIf="!pet.image || imageError" data-bs-toggle="modal" data-bs-target="#subirImagen">
       <img src="profile.svg" class="card-img-top" title="Subir imagen">
       <p>Subir imagen</p>
     </div>
@@ -36,7 +36,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="enviarImagen()">Agregar</button>
+        <app-loading *ngIf="isLoading"></app-loading>
+        <button *ngIf="!isLoading" type="button" class="btn btn-primary" (click)="enviarImagen()">Agregar</button>
       </div>
     </div>
   </div>
