@@ -51,7 +51,7 @@
                     <app-diets [id]="id" [diets]="pet.scheduleDiets" (update)="actualizar()"></app-diets>
                 </ng-container>
                 <ng-container *ngSwitchCase="'Historial'">
-                    <app-history [id]="id"></app-history>
+                    <app-history [id]="id" [pet]="pet" (update)="actualizar()"></app-history>
                 </ng-container>
               </ng-container>
             </div>

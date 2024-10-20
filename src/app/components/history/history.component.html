@@ -7,7 +7,7 @@
       </h2>
       <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
         <div class="accordion-body">
-            <app-visit [id]="this.id"></app-visit>
+            <app-visit [id]="this.id" [visits]="pet.vetvisits" (update)="actualizar()"></app-visit>
         </div>
       </div>
     </div>
