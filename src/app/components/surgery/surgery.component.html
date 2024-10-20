@@ -69,7 +69,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" (click)="addSurgery()">Agregar</button>
+                <app-loading *ngIf="isLoading"></app-loading>
+                <button *ngIf="!isLoading" type="button" class="btn btn-primary" (click)="addSurgery()">Agregar</button>
             </div>
         </div>
     </div>

@@ -31,7 +31,7 @@
       </h2>
       <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
         <div class="accordion-body">
-            <app-surgery [id]="this.id"></app-surgery>
+            <app-surgery [id]="this.id" [surgeries]="pet.surgeries" (update)="actualizar()"></app-surgery>
         </div>
       </div>
     </div>

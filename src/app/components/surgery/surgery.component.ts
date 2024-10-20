@@ -1,13 +1,16 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { IsisterService } from '../../_services/isister.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { LoadingComponent } from '../loading/loading.component';
+import { NotificationService } from '../../_services/notification.service';
 
 @Component({
   selector: 'app-surgery',
   standalone: true,
   imports: [
     CommonModule,
+    LoadingComponent,
     ReactiveFormsModule
   ],
   templateUrl: './surgery.component.html',
@@ -15,16 +18,21 @@ import { CommonModule } from '@angular/common';
 })
 export class SurgeryComponent {
   @Input() id!: string;
+  @Input() surgeries: any;
+
+  @Output() update = new EventEmitter<void>();
+
   @ViewChild('closebutton') closebutton: any;
 
   surgeryForm: FormGroup;
   public types: any;
   private typesId: any;
-  public surgeries: any;
+  public isLoading: boolean = false;
 
   constructor(
     private isister: IsisterService,
-    private formBuild: FormBuilder
+    private formBuild: FormBuilder,
+    private notify: NotificationService
   ) {
     this.surgeryForm = this.formBuild.group({
       type: [''],
@@ -52,19 +60,6 @@ export class SurgeryComponent {
         console.log(error.status);
       }
     });
-
-    this.isister.getSurgery(this.id).subscribe({
-      next:(data:any) => {
-        data.forEach((surgery:any) => {
-          let name = JSON.parse(surgery.type.name);
-          surgery.type = name.es;
-        })
-        this.surgeries = data;
-      },
-      error:(error) => {
-        console.log(error.status);
-      }
-    })
   }
 
   addSurgery(): void {
@@ -79,12 +74,18 @@ export class SurgeryComponent {
       complications: this.surgeryForm.value.complications
     }
 
+    this.isLoading = true;
+
     this.isister.addSurgery(object,this.id).subscribe({
       next:(object:any) => {
         this.closebutton.nativeElement.click();
+        this.isLoading = false;
+        this.notify.setAlert('Operación añadida','success');
+        this.update.emit();
       },
       error:(error) => {
-        console.log(error.status);
+        this.isLoading = false;
+        this.notify.setAlert('No se ha podido añadir','danger');
       }
     })
   }
