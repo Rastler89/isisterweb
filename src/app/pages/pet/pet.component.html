@@ -48,7 +48,7 @@
                   <app-walks [id]="id" [walks]="pet.scheduleWalks" (update)="actualizar()"></app-walks>
                 </ng-container>
                 <ng-container *ngSwitchCase="'Dietas'">
-                    <app-diets [id]="id"></app-diets>
+                    <app-diets [id]="id" [diets]="pet.scheduleDiets" (update)="actualizar()"></app-diets>
                 </ng-container>
                 <ng-container *ngSwitchCase="'Historial'">
                     <app-history [id]="id"></app-history>
