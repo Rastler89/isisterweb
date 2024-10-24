@@ -22,6 +22,7 @@ export interface Pet {
     treatments?: any;
     surgeries?: any;
     medicaltests?: any;
+    constants?: any;
 }
 
 export interface responsePet {

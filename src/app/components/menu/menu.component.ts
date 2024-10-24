@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { NotificationService } from '../../_services/notification.service';
 
 @Component({
   selector: 'app-menu',
@@ -14,13 +15,18 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class MenuComponent {
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router
+  ) {}
 
   isCurrentRoute(url: string) {
     return this.router.url == url;
   }
 
   logout(): void {
-    alert('hola');
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    this.router.navigate(['/']);
+    window.location.reload();
   }
 }

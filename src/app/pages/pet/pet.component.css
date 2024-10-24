@@ -8,3 +8,7 @@ button {
   margin-right: 2.5px;
   margin-left: 2.5px;
 }
+
+.action {
+  cursor: pointer;
+}

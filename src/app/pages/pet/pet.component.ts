@@ -1,6 +1,6 @@
 import { Component, ViewChild, inject } from '@angular/core';
 import { IsisterService } from '../../_services/isister.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { VaccinesComponent } from '../../components/vaccines/vaccines.component';
 import { AllergiesComponent } from '../../components/allergies/allergies.component';
@@ -10,6 +10,7 @@ import { HistoryComponent } from '../../components/history/history.component';
 import { Pet } from '../../interfaces/Pet';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { LoadingComponent } from '../../components/loading/loading.component';
+import { NotificationService } from '../../_services/notification.service';
 
 @Component({
   selector: 'app-pet',
@@ -43,7 +44,11 @@ export class PetComponent {
     breed: [''],
     code: [''],
     description: [''],
-    character: ['']
+    character: [''],
+  });
+  public constantForm: FormGroup = this.formBuild.group({
+    size: [''],
+    weight: ['']
   })
 
   public races: any;
@@ -52,7 +57,9 @@ export class PetComponent {
 
   constructor(
     private isister: IsisterService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private notify: NotificationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -63,6 +70,7 @@ export class PetComponent {
     this.isister.getPet(this.id).subscribe({
       next:(object:any) => {
         this.getPet(object);
+        console.log(this.pet);
       },
       error:(error) => {
         console.log(error.status);
@@ -108,9 +116,23 @@ export class PetComponent {
       this.pet.gender = 'Macho';
     }
     this.calculateAge();
+
+    let constants:any[] = [];
+    this.pet.constants.forEach((constant:any) => {
+      if (constants[constant['type']] == undefined) {
+        constants[constant['type']] = [];
+      }
+      constants[constant['type']].push(constant);
+    })
+
+    this.pet.constants = constants;
+
+    this.constantForm.patchValue({
+      size: this.pet.constants[1][0]['value'],
+      weight: this.pet.constants[2][0]['value']
+    })
+
     this.isLoading = false;
-    localStorage.setItem('Pet', JSON.stringify(this.pet));
-    console.log(this.pet);
   }
 
   onTabChange(tabName: string) {
@@ -134,7 +156,7 @@ export class PetComponent {
 
   updatePet(): void {
     if (this.petForm.invalid) {
-      console.log('fail');
+      this.notify.setAlert('Porfavor rellene los campos obligatorios','danger');
     }
 
     const object:any = {
@@ -150,9 +172,10 @@ export class PetComponent {
       next:(data) => {
         this.getPet(data);
         this.closebutton.nativeElement.click();
+        this.notify.setAlert('Cambios añadidos con éxito!','success');
       },
       error:(error) => {
-        console.log(error.status);
+        this.notify.setAlert('No se han podido añadir los cambios','danger');
       }
     })
   }
@@ -170,7 +193,57 @@ export class PetComponent {
     });
   }
 
-  confirmDown(): void {
-    
+  saveSize(): void {
+
+    if(this.constantForm.value.size == '' || this.constantForm.value.size == this.pet.constants[1][0]['value']) {
+      this.notify.setAlert('Introduce un tamaño diferente al actual','warning');
+      return;
+    }
+
+    const obj:any = {
+      value: this.constantForm.value.size
+    }
+
+    this.isister.addSize(obj,this.id).subscribe({
+      next:(data) => {
+        this.notify.setAlert('Constante añadida','success');
+        this.actualizar();
+      },
+      error:(error) => {
+        this.notify.setAlert('No se ha podido añadir','danger');
+      }
+    })
+  }
+
+  saveWeight(): void {
+    if(this.constantForm.value.weight == '' || this.constantForm.value.weight == this.pet.constants[2][0]['value']) {
+      this.notify.setAlert('Introduce un peso diferente al actual','warning');
+      return;
+    }
+
+    const obj:any = {
+      value: this.constantForm.value.weight
+    }
+
+    this.isister.addWeight(obj,this.id).subscribe({
+      next:(data) => {
+        this.notify.setAlert('Constante añadida','success');
+        this.actualizar();
+      },
+      error:(error) => {
+        this.notify.setAlert('No se ha podido añadir','danger');
+      }
+    })
+  }
+
+  confirmDown(name:string): void {
+    if(confirm("Estas segur@ que quieres dar de baja a "+name)) {
+      this.isister.changeState({"value":0},this.id).subscribe({
+        next:(data) => {
+          this.notify.setAlert('Mascota dada de baja','success');
+          this.router.navigate(['/home']);
+        }
+      })
+    }
   }
 }

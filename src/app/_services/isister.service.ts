@@ -136,11 +136,23 @@ export class IsisterService {
   }
 
   changeProfile(profile:any) {
-    return this.http.post(this.api+'profile',httpOptions);
+    return this.http.post(this.api+'profile',profile,httpOptions);
   }
 
   getPublicPet(hash:string) {
     return this.http.get(this.api+'public/pet/'+hash,httpOptions);
+  }
+
+  addSize(size:any,id:string) {
+    return this.http.post(this.api+'pets/'+id+'/size',size,httpOptions);
+  }
+
+  addWeight(weight:any,id:string) {
+    return this.http.post(this.api+'pets/'+id+'/weight',weight,httpOptions);
+  }
+
+  changeState(obj:any,id:string) {
+    return this.http.put(this.api+'pets/'+id+'/status',obj,httpOptions);
   }
 
 }

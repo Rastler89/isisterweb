@@ -31,6 +31,7 @@ export class PetComponent {
   });
 
   public isLoading: boolean = false;
+  public isLoading2: boolean = false;
   public imageError: boolean = false;
 
   public imagePreviewUrl: string | null = null;
@@ -110,12 +111,27 @@ export class PetComponent {
     }
   }
 
-  onChangeURL(url: SafeUrl) {
+  onChangeURL(url: SafeUrl): void {
     this.qrCodeDownloadLink = url;
   }
 
-  onImageError() {
+  onImageError(): void {
     this.imageError = true;
+  }
+
+  changeStatus(): void {
+    this.isLoading2 = true;
+    this.isister.changeState({"value":1},this.pet.id).subscribe({
+      next:(data) => {
+        this.isLoading2 = false;
+        this.notify.setAlert('Dado de alta','success');
+        this.pet.status = 1;
+      },
+      error: (error) => {
+        this.isLoading2 = false;
+        this.notify.setAlert('Se ha excedido el maximo de mascotas activas','danger');
+      }
+    })
   }
 
 }
