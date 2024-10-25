@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Pet, responsePet } from '../../interfaces/Pet';
 import { PetComponent } from '../../components/pet/pet.component';
 import { NotificationService } from '../../_services/notification.service';
+import { LoadingComponent } from "../../components/loading/loading.component";
 
 @Component({
   selector: 'app-home',
@@ -12,8 +13,9 @@ import { NotificationService } from '../../_services/notification.service';
   imports: [
     ReactiveFormsModule,
     CommonModule,
-    PetComponent
-  ],
+    PetComponent,
+    LoadingComponent
+],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -36,6 +38,7 @@ export class HomeComponent implements OnInit {
   public isLoading: boolean = true;
   public pets: Pet[] | undefined;
   public qty: number = 0;
+  public invalid: boolean = false;
 
   constructor(
     private isister: IsisterService,
@@ -61,9 +64,6 @@ export class HomeComponent implements OnInit {
         });
         this.races = data;
         this.breeds = result;
-      }, 
-      error:(error) => {
-        console.log(error.status);
       }
     });
   }
@@ -115,7 +115,7 @@ export class HomeComponent implements OnInit {
       }, 
       error:(error) => {
         this.isLoading = false;
-        console.log(error.status);
+        this.invalid = true;
       }
     });
   }

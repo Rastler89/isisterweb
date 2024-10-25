@@ -1,15 +1,8 @@
-<div class="container mt-12 pt-12">
+<div class="container mt-12 pt-12" *ngIf="!invalid">
     <div class="row">
         <div class="col text-center">
             <button type="button" class="btn btn-outline-success btn-lg" data-bs-toggle="modal" data-bs-target="#crearMascota" *ngIf="!isLoading">Agregar mascota</button>
         </div>
-    </div>
-    <div class="row" *ngIf="isLoading">
-      <div class="col d-flex justify-content-center">
-        
-        <div class="spinner-grow text-info" style="margin-top: 10px; width: 3rem; height: 3rem;" role="status">
-        </div>
-      </div>
     </div>
     <div class="row" *ngIf="!isLoading">
       <div class="col-sm-12 col-md-6 col-lg-3 pt-4 pb-2 mx-2" *ngFor="let pet of pets">
@@ -17,6 +10,16 @@
       </div>
     </div>
 </div>
+<div class="container mt-12 pt-12" *ngIf="invalid">
+  <div class="p-5 mb-4 bg-warning rounded-3">
+    <div class="container-fluid py-5">
+      <h1 class="display-5 fw-bold">Verifica su correo</h1>
+      <p class="col-md-8 fs-4">Para poder acceder a la totalidad de la plataforma, verifique su correo. Revise que no este en SPAM.</p>
+      <!--<button class="btn btn-primary btn-lg" type="button">Example button</button>-->
+    </div>
+  </div> 
+</div>
+<app-loading *ngIf="isLoading"></app-loading>
 
 <div class="modal fade" id="crearMascota" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
