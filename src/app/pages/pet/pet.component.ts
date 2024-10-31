@@ -70,7 +70,6 @@ export class PetComponent {
     this.isister.getPet(this.id).subscribe({
       next:(object:any) => {
         this.getPet(object);
-        console.log(this.pet);
       },
       error:(error) => {
         console.log(error.status);
@@ -127,11 +126,21 @@ export class PetComponent {
 
     this.pet.constants = constants;
 
-    this.constantForm.patchValue({
-      size: this.pet.constants[1][0]['value'],
-      weight: this.pet.constants[2][0]['value']
-    })
+    if(this.pet.constants.length == 0) {
+      this.constantForm.setValue({
+        size: 0,
+        weight: 0
+      })
+    } else {
+      this.constantForm.setValue({
+        size: this.pet.constants[1][0]['value'],
+        weight: this.pet.constants[2][0]['value']
+      })
+    }
 
+    console.log(this.pet);
+    
+    console.log('entro final');
     this.isLoading = false;
   }
 

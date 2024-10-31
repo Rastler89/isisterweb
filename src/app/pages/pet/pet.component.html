@@ -81,7 +81,7 @@
           </div>
           <div class="card-body">
             <form [formGroup]="constantForm">
-              <label class="form-label">Tamaño</label>
+              <label class="form-label">Tamaño (cm)</label>
               <div class="input-group">
                 <input formControlName="size" min="0" type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
                 <span class="input-group-text action" (click)="saveSize()">
@@ -95,7 +95,7 @@
                   </svg>
                 </span>-->
               </div>
-              <label class="form-label mt-4">Peso</label>
+              <label class="form-label mt-4">Peso (Kg)</label>
               <div class="input-group">
                 <input formControlName="weight" min="0" type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
                 <span class="input-group-text action" (click)="saveWeight()">
