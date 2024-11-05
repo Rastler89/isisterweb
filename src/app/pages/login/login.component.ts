@@ -6,6 +6,7 @@ import { Login } from '../../interfaces/Login';
 import { NotificationService } from '../../_services/notification.service';
 import { CommonModule } from '@angular/common';
 import { LoadingComponent } from '../../components/loading/loading.component';
+import { HeaderPublicComponent } from "../../components/header-public/header-public.component";
 
 @Component({
   selector: 'app-login',
@@ -14,8 +15,9 @@ import { LoadingComponent } from '../../components/loading/loading.component';
     CommonModule,
     LoadingComponent,
     RouterLink,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule,
+    HeaderPublicComponent
+],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
   

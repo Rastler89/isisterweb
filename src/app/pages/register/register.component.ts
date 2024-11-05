@@ -5,6 +5,7 @@ import { NotificationService } from '../../_services/notification.service';
 import { Router, RouterLink } from '@angular/router';
 import { LoadingComponent } from '../../components/loading/loading.component';
 import { CommonModule } from '@angular/common';
+import { HeaderPublicComponent } from "../../components/header-public/header-public.component";
 
 @Component({
   selector: 'app-register',
@@ -13,8 +14,9 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     RouterLink,
     ReactiveFormsModule,
-    LoadingComponent
-  ],
+    LoadingComponent,
+    HeaderPublicComponent
+],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
