@@ -23,7 +23,7 @@ import { HeaderPublicComponent } from "../../components/header-public/header-pub
 export class RegisterComponent {
 
   public isLoading: boolean = false;
-
+  private type: string = 'user';
   public formBuild = inject(FormBuilder);
   public formRegister: FormGroup = this.formBuild.group({
     name: ['',Validators.required],
@@ -38,7 +38,11 @@ export class RegisterComponent {
     private authService: AuthService,
     private router: Router,
     private notify: NotificationService
-  ) { }
+  ) { 
+    if(this.router.url == '/register/society') {
+      this.type = 'society';
+    }
+  }
 
   validarContrasenas(formGroup: FormGroup) {
     const { password, confirmPassword } = formGroup.controls;
@@ -57,7 +61,7 @@ export class RegisterComponent {
 
     this.isLoading = true;
 
-    this.authService.register(this.formRegister.value).subscribe({
+    this.authService.register(this.formRegister.value,this.type).subscribe({
       next: (data:any) => {
         this.notify.setAlert('Registro exitoso','success');
         this.router.navigate(['/login']);

@@ -64,7 +64,8 @@ export class AuthService {
     })
   }
 
-  register(user:any): Observable<any> {
+  register(user:any,type:string): Observable<any> {
+    user.type = type;
     return this.http.post(this.api2+'register', user, httpOptions);
   }
 

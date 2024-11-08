@@ -15,6 +15,7 @@ import { SocietiesComponent } from './pages/societies/societies.component';
 export const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [publicGuard]},
     { path: 'register', component: RegisterComponent, canActivate: [publicGuard]},
+    { path: 'register/society', component: RegisterComponent, canActivate: [publicGuard]},
     { path: 'home', component: HomeComponent, canActivate: [authGuard]},
     { path: 'pet/:id', component: PetComponent, canActivate: [authGuard]},
     { path: 'profile', component: ProfileComponent, canActivate: [authGuard]},

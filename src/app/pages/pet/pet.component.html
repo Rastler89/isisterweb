@@ -72,6 +72,8 @@
                     <p>{{pet.specie_en}} - {{pet.breed_en}}</p>
                     <p>{{pet.gender}}</p>
                     <p><em>{{pet.code}}</em></p>
+                    <button *ngIf="pet.adoptive" class="btn btn-outline-success">Poner en adopción</button>
+                    <button *ngIf="pet.adoptive && true" class="btn btn-outline-warning">Desactivar adopción</button>
                 </div>
             </div>
         </div>

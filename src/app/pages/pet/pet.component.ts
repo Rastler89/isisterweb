@@ -138,9 +138,6 @@ export class PetComponent {
       })
     }
 
-    console.log(this.pet);
-    
-    console.log('entro final');
     this.isLoading = false;
   }
 
