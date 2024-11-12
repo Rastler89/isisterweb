@@ -11,6 +11,7 @@ import { PetPublicComponent } from './pages/public/pet-public/pet-public.compone
 import { LegalComponent } from './pages/legal/legal.component';
 import { PrivacityComponent } from './pages/privacity/privacity.component';
 import { SocietiesComponent } from './pages/societies/societies.component';
+import { AdoptComponent } from './pages/adopt/adopt.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [publicGuard]},
@@ -19,6 +20,7 @@ export const routes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [authGuard]},
     { path: 'pet/:id', component: PetComponent, canActivate: [authGuard]},
     { path: 'profile', component: ProfileComponent, canActivate: [authGuard]},
+    { path: 'adopt', component: AdoptComponent, canActivate: [authGuard]},
     { path: 'landing', component: LandingComponent, canActivate: [publicGuard]},
     { path: 'public/pet/:hash', component: PetPublicComponent, canActivate: [publicGuard]},
     { path: 'legal', component: LegalComponent, canActivate: [publicGuard]},

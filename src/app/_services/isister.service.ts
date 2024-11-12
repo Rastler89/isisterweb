@@ -155,4 +155,8 @@ export class IsisterService {
     return this.http.put(this.api+'pets/'+id+'/status',obj,httpOptions);
   }
 
+  changeAdoption(value:boolean,id:string) {
+    return this.http.put(this.api+'pets/'+id+'/adopt',{value: value},httpOptions);
+  }
+
 }

@@ -24,6 +24,7 @@ export interface Pet {
     medicaltests?: any;
     constants?: any;
     adoptive?: any;
+    is_in_adoption: boolean;
 }
 
 export interface responsePet {

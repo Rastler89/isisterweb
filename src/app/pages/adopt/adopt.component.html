@@ -1,0 +1,36 @@
+<div class="container my-5">
+    <h2 class="text-center mb-4">Buscador de Mascotas</h2>
+    <app-loading *ngIf="isLoading"></app-loading>
+    <form id="buscadorMascotas" *ngIf="!isLoading" [formGroup]="formSearch">
+        <div class="row mb-3">
+            <!-- Selección de País -->
+            <div class="col-md-4">
+                <label for="pais" class="form-label">País</label>
+                <input class="form-control" (input)="filtrarEstados()" list="countriesList" id="country" formControlName="country" >
+                <datalist id="countriesList">
+                    <option *ngFor="let country of paises" [value]="country.iso">{{country.name}}</option>
+                </datalist>
+            </div>
+            <!-- Selección de Provincia -->
+            <div class="col-md-4">
+                <label for="provincia" class="form-label">Provincia</label>
+                <input class="form-control" list="statesList" id="state" formControlName="state">
+                <datalist id="statesList">
+                    <option *ngFor="let state of filteredStates" [value]="state.name.en">{{state.name.en}}</option>
+                </datalist>
+            </div>
+            <!-- Selección de Especie de Animal -->
+            <div class="col-md-4">
+                <label for="especie" class="form-label">Especie</label>
+                <input class="form-control" list="speciesList" id="specie" formControlName="specie">
+                <datalist id="speciesList">
+                    <option *ngFor="let specie of species" [value]="specie.name">{{specie.name}}</option>
+                </datalist>
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+    </form>
+    
+</div>

@@ -81,7 +81,8 @@ export class HomeComponent implements OnInit {
       birth: this.petForm.value.birth,
       race: this.petForm.value.race,
       breed: this.petForm.value.breed,
-      code: this.petForm.value.code
+      code: this.petForm.value.code,
+      is_in_adoption: false
     }
 
 

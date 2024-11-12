@@ -59,8 +59,6 @@ export class ProfileComponent {
       next:(data) => {
         let array = Object.values(data);
         let result: any[] = [];
-        let states: any[] = [];
-        let towns: any[] = [];
 
         array.forEach((country:any) => {
           country['name'] = JSON.parse(country['name']);

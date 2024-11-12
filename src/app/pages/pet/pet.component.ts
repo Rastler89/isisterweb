@@ -45,6 +45,7 @@ export class PetComponent {
     code: [''],
     description: [''],
     character: [''],
+    is_in_adoption: ['']
   });
   public constantForm: FormGroup = this.formBuild.group({
     size: [''],
@@ -54,6 +55,7 @@ export class PetComponent {
   public races: any;
   public breeds: any;
   public isLoading: boolean = true;
+  public isLoading2: boolean = false;
 
   constructor(
     private isister: IsisterService,
@@ -251,5 +253,15 @@ export class PetComponent {
         }
       })
     }
+  }
+
+  changeAdoption(value:boolean): void {
+    this.isLoading2 = true;
+    this.isister.changeAdoption(value,this.id).subscribe({
+      next:(data) => {
+        this.pet.is_in_adoption = value;
+        this.isLoading2 = false;
+      }
+    })
   }
 }
