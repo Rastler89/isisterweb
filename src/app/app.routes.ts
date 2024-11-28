@@ -10,6 +10,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { PetPublicComponent } from './pages/public/pet-public/pet-public.component';
 import { LegalComponent } from './pages/legal/legal.component';
 import { PrivacityComponent } from './pages/privacity/privacity.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [publicGuard]},
@@ -22,4 +23,5 @@ export const routes: Routes = [
     { path: 'legal', component: LegalComponent, canActivate: [publicGuard]},
     { path: 'privacity', component: PrivacityComponent, canActivate: [publicGuard]},
     { path: '', component: LandingComponent, canActivate: [publicGuard]},
+    { path: '**', component: NotFoundComponent,canActivate : [publicGuard]},
 ];
